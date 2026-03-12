@@ -4,17 +4,17 @@ const pages = [
     {
         title: "Selamat Datang!",
         text: "Ini adalah halaman pertama. Emoji akan jatuh seperti hujan sekarang.",
-        emoji: "🎉"  // Ganti dengan emoji yang kamu mau
+        emoji: "🎉"
     },
     {
         title: "Halaman Kedua",
         text: "Klik tombol 'Lanjut' di bawah. Sekarang backgroundnya berubah menjadi emoji buah-buahan.",
-        emoji: "🍎"  // Ganti dengan emoji yang kamu mau
+        emoji: "🍎"
     },
     {
         title: "Halaman Ketiga",
         text: "Ini halaman terakhir. Kamu bisa mengganti emoji ini menjadi apa saja yang kamu mau di dalam file script.js.",
-        emoji: "🐱"  // Ganti dengan emoji yang kamu mau
+        emoji: "🐱"
     }
 ];
 
@@ -23,6 +23,8 @@ const emojiContainer = document.getElementById('emoji-container');
 
 // Fungsi untuk membuat emoji jatuh seperti hujan
 function createEmojis(emojiType) {
+    console.log("Membuat emoji:", emojiType); // Debugging
+    
     // Hapus emoji lama jika ada
     emojiContainer.innerHTML = '';
 
@@ -33,8 +35,48 @@ function createEmojis(emojiType) {
 
         // Styling dasar emoji
         span.style.position = 'absolute';
-        span.style.left = Math.random() * 100 + 'vw'; // Posisi horizontal acak
-        span.style.fontSize = (Math.random() * 30 + 20) + 'px'; // Ukuran acak
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.fontSize = (Math.random() * 30 + 20) + 'px';
+        span.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+        span.style.animationDelay = Math.random() * 5 + 's';
+
+        emojiContainer.appendChild(span);
+    }
+}
+
+// Fungsi untuk ganti halaman
+function nextPage() {
+    console.log("Tombol ditekan!"); // Debugging
+    
+    try {
+        // Pindah ke halaman berikutnya
+        currentPageIndex++;
+
+        // Cek jika sudah sampai halaman terakhir
+        if (currentPageIndex >= pages.length) {
+            currentPageIndex = 0; // Kembali ke awal (looping)
+        }
+
+        // Update konten teks
+        const currentData = pages[currentPageIndex];
+        document.getElementById('page-title').innerText = currentData.title;
+        document.getElementById('page-text').innerText = currentData.text;
+
+        // Update background emoji (satu jenis emoji per halaman)
+        createEmojis(currentData.emoji);
+        
+        console.log("Halaman berubah ke:", currentPageIndex);
+    } catch (error) {
+        console.error("Error terjadi:", error);
+        alert("Terjadi error: " + error.message);
+    }
+}
+
+// Jalankan fungsi saat website pertama kali dibuka
+window.onload = function() {
+    console.log("Website loaded!");
+    createEmojis(pages[0].emoji);
+};        span.style.fontSize = (Math.random() * 30 + 20) + 'px'; // Ukuran acak
         span.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`; // Durasi jatuh acak
         span.style.animationDelay = Math.random() * 5 + 's'; // Waktu mulai acak
 
