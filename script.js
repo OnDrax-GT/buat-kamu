@@ -136,8 +136,8 @@ function nextPage() {
     textElement.innerText = currentData.text;
 
     // Update background emoji
-    createEmojis(currentData.emojis);
+    createEmojis(currentData.emoji);
 }
 
 // Jalankan fungsi saat website pertama kali dibuka
-createEmojis(pages[0].emojis);
+createEmojis(pages[0].emoji);
