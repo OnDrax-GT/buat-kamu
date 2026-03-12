@@ -4,17 +4,17 @@ const pages = [
     {
         title: "Selamat Datang!",
         text: "Ini adalah halaman pertama. Emoji akan jatuh seperti hujan sekarang.",
-        emoji: "🎉"
+        emoji: ["🎉"]
     },
     {
         title: "Halaman Kedua",
         text: "Klik tombol 'Lanjut' di bawah. Sekarang backgroundnya berubah menjadi emoji buah-buahan.",
-        emoji: "🍎"
+        emoji: ["🍎"]
     },
     {
         title: "Halaman Ketiga",
         text: "Ini halaman terakhir. Kamu bisa mengganti emoji ini menjadi apa saja yang kamu mau di dalam file script.js.",
-        emoji: "🐱"
+        emoji: ["🐱"]
     }
 ];
 
