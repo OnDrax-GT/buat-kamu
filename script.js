@@ -22,12 +22,6 @@ const pages = [
 
 let currentPage = 0;
 
-// Inisialisasi
-document.addEventListener('DOMContentLoaded', function() {
-    createRain();
-    showPage(currentPage);
-    setInterval(createRain, 150); // Emoji jatuh setiap 150ms
-});
 
 // Fungsi untuk halaman berikutnya
 function nextPage() {
@@ -65,5 +59,16 @@ function createRain() {
     emoji.className = 'rain-emoji';
     emoji.textContent = RAIN_EMOJI; // EMOJI DARI VARIABLE DI ATAS!
     
+    // Posisi & animasi random
+    emoji.style.left = Math.random() * 100 + '%';
+    emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    emoji.style.animationDelay = Math.random() * 2 + 's';
+    emoji.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
     
+    rainContainer.appendChild(emoji);
+    
+    // Hapus setelah animasi
+    setTimeout(() => {
+        emoji.remove();
+    }, 7000);
 }
