@@ -1,159 +1,171 @@
-const pages = [
-    {
-        title: "Selamat Datang!",
-        text: "Ini adalah halaman pertama. Emoji akan jatuh seperti hujan sekarang.",
-        emoji: "🎉"
-    },
-    {
-        title: "Halaman Kedua",
-        text: "Klik tombol 'Lanjut' di bawah. Sekarang backgroundnya berubah menjadi emoji buah-buahan.",
-        emoji: "🍎"
-    },
-    {
-        title: "Halaman Ketiga",
-        text: "Ini halaman terakhir. Kamu bisa mengganti emoji ini menjadi apa saja yang kamu mau.",
-        emoji: "🐱"
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Rainy Emoji Background */
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.rain-emoji {
+    position: absolute;
+    font-size: 2rem;
+    animation: rainFall linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes rainFall {
+    0% {
+        transform: translateY(-100vh) rotateX(0deg);
+        opacity: 0;
     }
-];
-
-let currentPageIndex = 0;
-const emojiContainer = document.getElementById('emoji-container');
-
-function createEmojis(emojiType) {
-    emojiContainer.innerHTML = '';
-
-    for (let i = 0; i < 50; i++) {
-        const span = document.createElement('span');
-        span.innerText = emojiType;
-
-        span.style.position = 'absolute';
-        span.style.left = Math.random() * 100 + 'vw';
-        span.style.fontSize = (Math.random() * 30 + 20) + 'px';
-        span.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
-        span.style.animationDelay = Math.random() * 5 + 's';
-
-        emojiContainer.appendChild(span);
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(100vh) rotateX(360deg);
+        opacity: 0;
     }
 }
 
-function nextPage() {
-    currentPageIndex++;
-
-    if (currentPageIndex >= pages.length) {
-        currentPageIndex = 0;
-    }
-
-    const currentData = pages[currentPageIndex];
-    document.getElementById('page-title').innerText = currentData.title;
-    document.getElementById('page-text').innerText = currentData.text;
-
-    createEmojis(currentData.emoji);
+/* Text Box */
+.textbox-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-createEmojis(pages[0].emoji);        span.style.position = 'absolute';
-        span.style.left = Math.random() * 100 + 'vw';
-        span.style.fontSize = (Math.random() * 30 + 20) + 'px';
-        span.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
-        span.style.animationDelay = Math.random() * 5 + 's';
-
-        emojiContainer.appendChild(span);
-    }
+.textbox {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.5s ease;
 }
 
-// Fungsi untuk ganti halaman
-function nextPage() {
-    console.log("Tombol ditekan!"); // Debugging
+.textbox.fullscreen {
+    width: 95%;
+    max-width: 800px;
+    height: 80vh;
+    padding: 60px 40px;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+}
+
+.page-text {
+    font-size: 1.3rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.next-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.next-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+}
+
+.next-btn.hidden {
+    display: none;
+}
+
+/* Emoji Selector */
+.emoji-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.emoji-selector input {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+.emoji-selector button {
+    padding: 10px 20px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
     
-    try {
-        // Pindah ke halaman berikutnya
-        currentPageIndex++;
-
-        // Cek jika sudah sampai halaman terakhir
-        if (currentPageIndex >= pages.length) {
-            currentPageIndex = 0; // Kembali ke awal (looping)
-        }
-
-        // Update konten teks
-        const currentData = pages[currentPageIndex];
-        document.getElementById('page-title').innerText = currentData.title;
-        document.getElementById('page-text').innerText = currentData.text;
-
-        // Update background emoji (satu jenis emoji per halaman)
-        createEmojis(currentData.emoji);
-        
-        console.log("Halaman berubah ke:", currentPageIndex);
-    } catch (error) {
-        console.error("Error terjadi:", error);
-        alert("Terjadi error: " + error.message);
+    .page-text {
+        font-size: 1.1rem;
+    }
+    
+    .textbox {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .rain-emoji {
+        font-size: 1.5rem;
     }
 }
-
-// Jalankan fungsi saat website pertama kali dibuka
-window.onload = function() {
-    console.log("Website loaded!");
-    createEmojis(pages[0].emoji);
-};        span.style.fontSize = (Math.random() * 30 + 20) + 'px'; // Ukuran acak
-        span.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`; // Durasi jatuh acak
-        span.style.animationDelay = Math.random() * 5 + 's'; // Waktu mulai acak
-
-        emojiContainer.appendChild(span);
-    }
-}
-
-// Fungsi untuk ganti halaman
-function nextPage() {
-    // Pindah ke halaman berikutnya
-    currentPageIndex++;
-
-    // Cek jika sudah sampai halaman terakhir
-    if (currentPageIndex >= pages.length) {
-        currentPageIndex = 0; // Kembali ke awal (looping)
-    }
-
-    // Update konten teks
-    const currentData = pages[currentPageIndex];
-    document.getElementById('page-title').innerText = currentData.title;
-    document.getElementById('page-text').innerText = currentData.text;
-
-    // Update background emoji (satu jenis emoji per halaman)
-    createEmojis(currentData.emoji);
-}
-
-// Jalankan fungsi saat website pertama kali dibuka
-createEmojis(pages[0].emoji);        // Pilih emoji secara acak dari list yang kamu tentukan
-        const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
-        span.innerText = randomEmoji;
-
-        // Styling dasar emoji
-        span.style.position = 'absolute';
-        span.style.left = Math.random() * 100 + 'vw'; // Posisi horizontal acak
-        span.style.fontSize = (Math.random() * 20 + 20) + 'px'; // Ukuran acak
-        span.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`; // Durasi jatuh acak
-        span.style.animationDelay = Math.random() * 5 + 's'; // Waktu mulai acak
-
-        emojiContainer.appendChild(span);
-    }
-}
-
-// Fungsi untuk ganti halaman
-function nextPage() {
-    // Pindah ke halaman berikutnya
-    currentPageIndex++;
-
-    // Cek jika sudah sampai halaman terakhir
-    if (currentPageIndex >= pages.length) {
-        currentPageIndex = 0; // Kembali ke awal (looping)
-        // Atau bisa diganti alert("Selesai!") jika ingin berhenti
-    }
-
-    // Update konten teks
-    const currentData = pages[currentPageIndex];
-    titleElement.innerText = currentData.title;
-    textElement.innerText = currentData.text;
-
-    // Update background emoji
-    createEmojis(currentData.emoji);
-}
-
-// Jalankan fungsi saat website pertama kali dibuka
-createEmojis(pages[0].emoji);

@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Emoji Background</title>
+    <title>Rainy Emoji Story</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="emoji-container"></div>
-    <div class="content-box">
-        <h1 id="page-title"></h1>
-        <p id="page-text"></p>
-        <button id="next-btn" onclick="nextPage()"></button>
+    <!-- Background Rainy Emoji -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <!-- Text Box Container -->
+    <div class="textbox-container">
+        <div class="textbox" id="textbox">
+            <h1 class="page-title" id="pageTitle"></h1>
+            <p class="page-text" id="pageText"></p>
+            <button class="next-btn" id="nextBtn" onclick="nextPage()">LANJUT</button>
+        </div>
     </div>
+
+    <!-- Emoji Selector (Hidden by default) -->
+    <div class="emoji-selector" id="emojiSelector">
+        <h3>Pilih Emoji Hujan:</h3>
+        <input type="text" id="emojiInput" placeholder="Masukkan emoji (contoh: 🌧️)" maxlength="2">
+        <button onclick="setEmoji()">Set Emoji</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
