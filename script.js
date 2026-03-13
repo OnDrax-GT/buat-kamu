@@ -22,6 +22,12 @@ const pages = [
 
 let currentPage = 0;
 
+// Inisialisasi
+document.addEventListener('DOMContentLoaded', function() {
+    createRain();
+    showPage(currentPage);
+    setInterval(createRain, 150); // Emoji jatuh setiap 150ms
+});
 
 // Fungsi untuk halaman berikutnya
 function nextPage() {
