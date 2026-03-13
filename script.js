@@ -1,7 +1,6 @@
-// 🔥 UBAH EMOJI INI SESUAI KEINGINAN KAMU 🔥
-const RAIN_EMOJI = '🌧️'; // Ganti dengan emoji apa saja!
+const RAIN_EMOJI = '🌧️'; // Emoji Background
 
-// Data halaman (edit sesuai cerita kamu)
+// Data halaman
 const pages = [
     {
         title: "judul",
@@ -27,7 +26,7 @@ let currentPage = 0;
 document.addEventListener('DOMContentLoaded', function() {
     createRain();
     showPage(currentPage);
-    setInterval(createRain, 200); // Emoji jatuh setiap 200ms
+    setInterval(createRain, 150); // Emoji jatuh setiap 150ms
 });
 
 // Fungsi untuk halaman berikutnya
@@ -59,7 +58,7 @@ function showFinalPage() {
     document.querySelector('.textbox').classList.add('fullscreen');
 }
 
-// Buat efek hujan emoji (PAKAI EMOJI YANG KAMU SET)
+// Buat efek hujan emoji
 function createRain() {
     const rainContainer = document.getElementById('rainContainer');
     const emoji = document.createElement('div');
