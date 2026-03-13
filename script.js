@@ -1,171 +1,81 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+// 🔥 UBAH EMOJI INI SESUAI KEINGINAN KAMU 🔥
+const RAIN_EMOJI = '🌧️'; // Ganti dengan emoji apa saja!
 
-body {
-    font-family: 'Arial', sans-serif;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* Rainy Emoji Background */
-.rain-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.rain-emoji {
-    position: absolute;
-    font-size: 2rem;
-    animation: rainFall linear infinite;
-    opacity: 0.7;
-}
-
-@keyframes rainFall {
-    0% {
-        transform: translateY(-100vh) rotateX(0deg);
-        opacity: 0;
+// Data halaman (edit sesuai cerita kamu)
+const pages = [
+    {
+        title: "🌧️ Malam Hujan",
+        text: "Hujan turun perlahan di malam yang dingin. Suara tetesannya seperti lagu pengantar tidur."
+    },
+    {
+        title: "💭 Kenangan",
+        text: "Di balik jendela berkabut, kenangan lama mulai bermunculan satu per satu."
+    },
+    {
+        title: "🌙 Bulan Tersembunyi",
+        text: "Bulan bersembunyi di balik awan tebal, seolah ikut merasakan kesedihan ini."
+    },
+    {
+        title: "🌈 Pelangi Muncul",
+        text: "Hujan berhenti. Pelangi muncul di ufuk timur. Waktunya untuk melangkah maju."
     }
-    10% {
-        opacity: 0.7;
-    }
-    90% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(100vh) rotateX(360deg);
-        opacity: 0;
+];
+
+let currentPage = 0;
+
+// Inisialisasi
+document.addEventListener('DOMContentLoaded', function() {
+    createRain();
+    showPage(currentPage);
+    setInterval(createRain, 200); // Emoji jatuh setiap 200ms
+});
+
+// Fungsi untuk halaman berikutnya
+function nextPage() {
+    if (currentPage < pages.length - 2) {
+        currentPage++;
+        showPage(currentPage);
+    } else if (currentPage === pages.length - 2) {
+        currentPage++;
+        showFinalPage();
     }
 }
 
-/* Text Box */
-.textbox-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+// Tampilkan halaman biasa
+function showPage(pageIndex) {
+    const page = pages[pageIndex];
+    document.getElementById('pageTitle').textContent = page.title;
+    document.getElementById('pageText').textContent = page.text;
+    document.getElementById('nextBtn').classList.remove('hidden');
+    document.querySelector('.textbox').classList.remove('fullscreen');
 }
 
-.textbox {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 25px;
-    padding: 40px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 70vh;
-    overflow-y: auto;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.5s ease;
+// Tampilkan halaman akhir (full title)
+function showFinalPage() {
+    const finalPage = pages[pages.length - 1];
+    document.getElementById('pageTitle').textContent = finalPage.title;
+    document.getElementById('pageText').textContent = '';
+    document.getElementById('nextBtn').classList.add('hidden');
+    document.querySelector('.textbox').classList.add('fullscreen');
 }
 
-.textbox.fullscreen {
-    width: 95%;
-    max-width: 800px;
-    height: 80vh;
-    padding: 60px 40px;
-}
-
-.page-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    line-height: 1.2;
-}
-
-.page-text {
-    font-size: 1.3rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.next-btn {
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-}
-
-.next-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
-}
-
-.next-btn.hidden {
-    display: none;
-}
-
-/* Emoji Selector */
-.emoji-selector {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    z-index: 20;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-}
-
-.emoji-selector input {
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    margin-right: 10px;
-    font-size: 1.5rem;
-}
-
-.emoji-selector button {
-    padding: 10px 20px;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .page-title {
-        font-size: 2rem;
-    }
+// Buat efek hujan emoji (PAKAI EMOJI YANG KAMU SET)
+function createRain() {
+    const rainContainer = document.getElementById('rainContainer');
+    const emoji = document.createElement('div');
+    emoji.className = 'rain-emoji';
+    emoji.textContent = RAIN_EMOJI; // EMOJI DARI VARIABLE DI ATAS!
     
-    .page-text {
-        font-size: 1.1rem;
-    }
+    // Posisi & animasi random
+    emoji.style.left = Math.random() * 100 + '%';
+    emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    emoji.style.animationDelay = Math.random() * 2 + 's';
+    emoji.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
     
-    .textbox {
-        padding: 30px 20px;
-        margin: 20px;
-    }
+    rainContainer.appendChild(emoji);
     
-    .rain-emoji {
-        font-size: 1.5rem;
-    }
+    // Hapus setelah animasi
+    setTimeout(() => {
+        emoji.remove();
+    }, 7000);
 }
