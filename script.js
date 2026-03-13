@@ -4,20 +4,20 @@ const RAIN_EMOJI = '🌧️'; // Ganti dengan emoji apa saja!
 // Data halaman (edit sesuai cerita kamu)
 const pages = [
     {
-        title: "🌧️ Malam Hujan",
-        text: "Hujan turun perlahan di malam yang dingin. Suara tetesannya seperti lagu pengantar tidur."
+        title: "judul",
+        text: "text"
     },
     {
-        title: "💭 Kenangan",
-        text: "Di balik jendela berkabut, kenangan lama mulai bermunculan satu per satu."
+        title: "judul",
+        text: "text"
     },
     {
-        title: "🌙 Bulan Tersembunyi",
-        text: "Bulan bersembunyi di balik awan tebal, seolah ikut merasakan kesedihan ini."
+        title: "judul",
+        text: "text"
     },
     {
-        title: "🌈 Pelangi Muncul",
-        text: "Hujan berhenti. Pelangi muncul di ufuk timur. Waktunya untuk melangkah maju."
+        title: "judul",
+        text: "text"
     }
 ];
 
